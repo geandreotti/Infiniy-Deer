@@ -1,1 +1,1 @@
-# Infiniy-Deer
+# Infinity-Deer
