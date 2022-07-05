@@ -47,11 +47,7 @@ public class GameRoutineManager : MonoBehaviour
 
 	private void Start()
 	{
-		if (GameManager.Instance.online)
-		{
-			if (PhotonNetwork.IsMasterClient)
-				StartGameRoutine();
-		}
+		
 	}
 
 	private void Update()

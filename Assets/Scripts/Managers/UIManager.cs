@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviourPunCallbacks
 	[BoxGroup("UI Components")] [SerializeField] private CanvasGroup _retryScreen;
 	[BoxGroup("UI Components")] [SerializeField] private TextMeshProUGUI _retryMaxScore;
 	[BoxGroup("UI Components")] [SerializeField] private TextMeshProUGUI _retryCurrentScore;
+	[BoxGroup("UI Components")] [SerializeField] private GameObject _startButton;
 
 	[BoxGroup("Setting")] [SerializeField] private float _lifeBarSineLenght;
 	[BoxGroup("Setting")] [SerializeField] private float _lifeBarSineSpeed;
@@ -58,6 +59,12 @@ public class UIManager : MonoBehaviourPunCallbacks
 
 	void Start()
 	{
+		if (GameManager.Instance.online)
+			if (PhotonNetwork.IsMasterClient)
+				_startButton.SetActive(true);
+				else
+				_startButton.SetActive(false);
+
 	}
 
 	void Update()
@@ -257,6 +264,12 @@ public class UIManager : MonoBehaviourPunCallbacks
 	{
 		PhotonNetwork.LeaveRoom();
 		SceneManager.LoadScene("Lobby");
+	}
+
+	public void StartGame()
+	{
+		GameRoutineManager.Instance.StartGameRoutine();
+		_startButton.SetActive(false);
 	}
 
 	public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
